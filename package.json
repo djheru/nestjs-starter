@@ -9,7 +9,8 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "db-tunnel": "./scripts/db-tunnel.sh"
+    "db-tunnel": "./scripts/db-tunnel.sh",
+    "docker-init": "./scripts/docker-init.sh"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
