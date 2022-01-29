@@ -6,12 +6,12 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 ## Useful commands
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+- `npm run build` compile typescript to js
+- `npm run watch` watch for changes and compile
+- `npm run test` perform the jest unit tests
+- `cdk deploy` deploy this stack to your default AWS account/region
+- `cdk diff` compare deployed stack with current state
+- `cdk synth` emits the synthesized CloudFormation template
 
 # Generate New CDK Application
 
@@ -25,7 +25,7 @@ npx cdk init --language typescript
 
 ```bash
 npm i --save-dev \
-  eslint \           
+  eslint \
   @typescript-eslint/parser \
   @typescript-eslint/eslint-plugin \
   prettier \
@@ -61,4 +61,10 @@ npm i --save-dev \
   "printWidth": 90,
   "tabWidth": 2
 }
+```
+
+# Add NestJS Application
+
+```bash
+npx nest new application
 ```
