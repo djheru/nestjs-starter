@@ -1,8 +1,8 @@
 {
-  "name": "nestjs-starter",
+  "name": "note-taker",
   "version": "0.1.0",
   "bin": {
-    "nestjs-starter": "bin/nestjs-starter.js"
+    "note-taker": "bin/note-taker.js"
   },
   "scripts": {
     "build": "tsc",

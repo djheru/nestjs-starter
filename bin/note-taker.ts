@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { NestjsStarterStack } from '../lib/nestjs-starter-stack';
+import { NoteTakerStack } from '../lib/note-taker-stack';
 
 const app = new cdk.App();
-new NestjsStarterStack(app, 'NestjsStarterStack', {
+new NoteTakerStack(app, 'NoteTakerStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
