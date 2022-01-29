@@ -4,6 +4,7 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
+  "ignorePatterns": [".eslintrc", "./application"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",

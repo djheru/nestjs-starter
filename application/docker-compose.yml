@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  note-taker:
+    container_name: note-taker
+    build:
+      context: ./
+      target: development # or test or production
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${PORT}:${PORT}
+    command: npm run start:dev
+    env_file:
+      - ./.env
+    environment:
+      - PGHOST=note-taker-pg
+      - ADDRESS=0.0.0.0
+    networks:
+      - note-taker-net
+    depends_on:
+      - note-taker-pg
+
+  note-taker-pg:
+    container_name: note-taker-pg
+    image: postgres:12.9
+    networks:
+      - note-taker-net
+    environment:
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_DB: ${PGDATABASE}
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - note-taker-pgdata:/var/lib/postgresql/data
+
+networks:
+  note-taker-net:
+volumes:
+  note-taker-pgdata:
