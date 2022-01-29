@@ -1,5 +1,5 @@
 {
-  "name": "application",
+  "name": "note-taker-application",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -57,7 +57,11 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "moduleDirectories": [
+      "src",
+      "node_modules"
+    ],
+    "rootDir": "./",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

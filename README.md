@@ -68,3 +68,7 @@ npm i --save-dev \
 ```bash
 npx nest new application
 ```
+
+## Note on file paths
+
+You'll need to update the root directory and module path configs in the application's tsconfig, package.json and jest-e2e.json files, as shown in this commit
