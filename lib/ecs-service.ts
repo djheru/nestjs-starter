@@ -68,15 +68,10 @@ export class EcsService extends Construct {
 
     this.id = id;
     this.environmentName = environmentName;
-
-    this.hostedZoneDomainName =
-      this.environmentName === 'prod'
-        ? hostedZoneDomainName
-        : `${this.environmentName}.${hostedZoneDomainName}`;
-
+    this.hostedZoneDomainName = hostedZoneDomainName;
     this.serviceName = serviceName;
 
-    this.domainName = `${this.serviceName}.${this.hostedZoneDomainName}`;
+    this.domainName = `${this.serviceName}.${this.environmentName}.${this.hostedZoneDomainName}`;
 
     this.vpc = vpc;
     this.securityGroup = securityGroup;
