@@ -29,7 +29,7 @@ variable`,
   },
 };
 
-const hostedZoneDomainName = 'ensomata.io';
+const hostedZoneDomainName = 'planningpoker.dev';
 const serviceName = 'note-taker';
 
 const stackId = `${serviceName}-${environmentName}`;
