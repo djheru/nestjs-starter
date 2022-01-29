@@ -12,3 +12,53 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
  * `cdk deploy`      deploy this stack to your default AWS account/region
  * `cdk diff`        compare deployed stack with current state
  * `cdk synth`       emits the synthesized CloudFormation template
+
+# Generate New CDK Application
+
+```bash
+npx cdk init --language typescript
+```
+
+# Add ESLint and Prettier
+
+## Install Deps
+
+```bash
+npm i --save-dev \
+  eslint \           
+  @typescript-eslint/parser \
+  @typescript-eslint/eslint-plugin \
+  prettier \
+  eslint-config-prettier \
+  eslint-plugin-prettier
+```
+
+## ESLint Config
+
+```json
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {}
+}
+```
+
+## Prettier Config
+
+```json
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 90,
+  "tabWidth": 2
+}
+```
