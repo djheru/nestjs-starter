@@ -2,13 +2,14 @@
   "name": "note-taker",
   "version": "0.1.0",
   "bin": {
-    "note-taker": "bin/note-taker.js"
+    "note-taker": "build/bin/note-taker.js"
   },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "db-tunnel": "./scripts/db-tunnel.sh"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",

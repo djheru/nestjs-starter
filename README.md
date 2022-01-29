@@ -72,3 +72,13 @@ npx nest new application
 ## Note on file paths
 
 You'll need to update the root directory and module path configs in the application's tsconfig, package.json and jest-e2e.json files, as shown in this commit
+
+# Connect to RDS DB
+
+To connect to the RDS DB, you can use the tunnelling script ./bin/db-tunnel.sh. You can't connect directly to the DB because it is in a private VPC network. You can invoke the script with the name of the environment (e.g. "dev") and the name of your private key (e.g. "~/.ssh/cdk_key") and the script will look up the instance details, the RDS details, and handle pushing up your ssh key. It will then open the tunnel and you'll be able to connect to the remote DB as though it were on your localhost.
+
+## Example
+
+```bash
+npm run db-tunnel dev ~/.ssh/cdk_key
+```
