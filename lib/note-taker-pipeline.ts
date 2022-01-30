@@ -32,7 +32,7 @@ export interface RecipesPipelineProps {
 export class NoteTakerPipeline extends Construct {
   static CDK_VERSION = '2.9.0';
   static GITHUB_TOKEN_SECRET_NAME = 'github-token';
-  static REPO_NAME = 'note-taker';
+  static REPO_NAME = 'nestjs-starter';
   static REPO_OWNER = 'djheru';
   static environmentBranchMapping: Record<string, string> = {
     dev: 'dev',
