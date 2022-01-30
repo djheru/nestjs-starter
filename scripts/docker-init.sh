@@ -7,7 +7,7 @@ image="note-taker"
 account=$(aws sts get-caller-identity --query 'Account' --output text)
 
 # Create repository
-aws ecr create-repository --repository-name note-taker/note-taker
+aws ecr create-repository --repository-name note-taker/note-taker || true
 
 # Log in to ecr with docker
 # aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 205375198116.dkr.ecr.us-east-1.amazonaws.com
