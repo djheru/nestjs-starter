@@ -2,7 +2,7 @@ import { aws_codebuild, aws_ec2, aws_iam } from 'aws-cdk-lib';
 import { pascalCase } from 'pascal-case';
 import { Environment } from './note-taker-stack';
 
-export const CDK_VERSION = '1.128.0';
+export const CDK_VERSION = '2.9.0';
 
 export interface InfrastructureProjectConfigParams {
   id: string;
