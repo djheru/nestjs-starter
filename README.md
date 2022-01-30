@@ -82,3 +82,24 @@ To connect to the RDS DB, you can use the tunnelling script ./bin/db-tunnel.sh. 
 ```bash
 npm run db-tunnel dev ~/.ssh/cdk_key
 ```
+
+# Complete Application Setup
+
+## Install Dependencies
+
+```bash
+npm i \
+  @nestjs/passport \
+  @nestjs/swagger \
+  @nestjs/typeorm \
+  class-transformer \
+  class-validator \
+  jwks-rsa \
+  luxon \
+  passport \
+  passport-jwt \
+  pg \
+  swagger-ui-express \
+  typeorm \
+  ulid
+```
