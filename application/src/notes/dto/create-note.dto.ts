@@ -30,4 +30,16 @@ export class CreateNoteDto {
   @Type(() => CreateTodoDto)
   @ValidateNested({ each: true })
   readonly todos?: CreateTodoDto[];
+
+  @ApiProperty({ description: 'Date entity was created' })
+  @IsOptional()
+  createdDate?: Date;
+
+  @ApiProperty({ description: 'Date entity was updated' })
+  @IsOptional()
+  updatedDate?: Date;
+
+  @ApiProperty({ description: 'Date entity was deleted' })
+  @IsOptional()
+  deletedDate?: Date;
 }

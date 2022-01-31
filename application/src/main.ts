@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { LoggerService } from 'logger/logger.service';
 import { AppModule, appModuleDocumentation } from './app.module';
+import { HttpExceptionFilter } from 'common/filters/http-exception.filter';
 
 const { ADDRESS = '0.0.0.0', NAME, PORT = 4000 } = process.env;
 
@@ -18,6 +19,7 @@ async function bootstrap() {
       },
     })
   );
+  // app.useGlobalFilters(new HttpExceptionFilter());
   appModuleDocumentation(app);
   app.enableCors();
   await app.listen(PORT, ADDRESS);

@@ -1,11 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { LoggerService } from 'logger/logger.service';
+import { PaginationQueryDto } from 'common/dto/pagination-query.dto';
 
 @Controller('notes')
 export class NotesController {
-  constructor(private readonly notesService: NotesService) {}
+  constructor(
+    private readonly notesService: NotesService,
+    private readonly log: LoggerService
+  ) {}
 
   @Post()
   create(@Body() createNoteDto: CreateNoteDto) {
@@ -13,8 +18,8 @@ export class NotesController {
   }
 
   @Get()
-  findAll() {
-    return this.notesService.findAll();
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
+    return this.notesService.findAll(paginationQuery);
   }
 
   @Get(':id')

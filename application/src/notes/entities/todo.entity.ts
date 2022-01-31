@@ -1,4 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Note } from './note.entity';
 
 @Entity()
@@ -17,4 +25,13 @@ export class Todo {
 
   @ManyToOne((type) => Note, (note) => note.todos)
   note: Note;
+
+  @CreateDateColumn()
+  createdDate: Date;
+
+  @UpdateDateColumn()
+  updatedDate: Date;
+
+  @DeleteDateColumn()
+  deletedDate: Date;
 }

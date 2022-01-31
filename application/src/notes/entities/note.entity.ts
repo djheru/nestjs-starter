@@ -1,10 +1,13 @@
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Tag } from './tag.entity';
 import { Todo } from './todo.entity';
@@ -24,14 +27,25 @@ export class Note {
   details?: string;
 
   @ManyToMany((type) => Tag, (tags) => tags.notes, {
-    cascade: true,
+    cascade: ['insert', 'update'],
+    eager: true,
   })
   @JoinTable()
   tags?: Tag[];
 
   @OneToMany(() => Todo, (todos) => todos.note, {
-    cascade: true,
+    cascade: ['insert', 'update', 'soft-remove', 'recover'],
+    eager: true,
   })
   @JoinTable()
   todos?: Todo[];
+
+  @CreateDateColumn()
+  createdDate: Date;
+
+  @UpdateDateColumn()
+  updatedDate: Date;
+
+  @DeleteDateColumn()
+  deletedDate: Date;
 }
