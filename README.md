@@ -103,3 +103,9 @@ npm i \
   typeorm \
   ulid
 ```
+
+# Create New API Resource
+
+```bash
+npx nest g resource notes
+```

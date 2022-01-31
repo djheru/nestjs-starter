@@ -7,6 +7,7 @@ import databaseConfig, { databases } from 'config/database.config';
 import { LoggerModule } from 'logger/logger.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { NotesModule } from './notes/notes.module';
 
 export const appModuleDocumentation = (app: INestApplication): void => {
   const options = new DocumentBuilder()
@@ -33,6 +34,7 @@ export const appModuleDocumentation = (app: INestApplication): void => {
         configService.get(databases.NOTE_TAKER),
     }),
     AuthModule,
+    NotesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
