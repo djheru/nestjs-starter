@@ -206,6 +206,8 @@ export class NoteTakerStack extends Stack {
 
   buildEcsService() {
     const taskEnvironment = {
+      AUTH0_ISSUER_URL: 'https://dev-pdamra.auth0.com/',
+      AUTH0_AUDIENCE: 'https://ecs-recipes/',
       NAME: this.props.serviceName,
       NODE_ENV: this.environmentName,
       ADDRESS: '0.0.0.0',
@@ -213,8 +215,6 @@ export class NoteTakerStack extends Stack {
       NO_COLOR: 'true',
     };
     const taskSecrets = {
-      AUTH0_ISSUER_URL: 'https://dev-pdamra.auth0.com/',
-      AUTH0_AUDIENCE: 'https://ecs-recipes/',
       PGUSER: aws_ecs.Secret.fromSecretsManager(
         this.databaseCredentialsSecret,
         'username'
