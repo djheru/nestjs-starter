@@ -9,7 +9,6 @@ import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { Note } from './entities/note.entity';
 import { Tag } from './entities/tag.entity';
-import { Todo } from './entities/todo.entity';
 
 @Injectable()
 export class NotesService {
