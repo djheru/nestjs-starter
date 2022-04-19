@@ -1,73 +1,161 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Note Taker API
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+An example production-ready boilerplate API using Nest.js, TypeORM, PostgreSQL, Docker, and AWS CDK (Cloud Development Kit) for Continuous Integration/Continuous Delivery Deployment. Also includes authentication with Auth0 and unit tests with Jest
+
+## Prerequisites
+
+To run the application locally, you should have the following software installed:
+
+- Node.js version >= 14
+- Docker desktop
+- CURL (to obtain auth tokens)
+
+To perform deployments to AWS cloud, you should also have the following ready to go:
+
+- AWS CLI installed and configured
+- AWS CDK CLI installed and configured
+- An SSH client and key pair to use for connecting to the remote server
+- A GitHub personal access token created and saved in AWS Secrets Manager under the name "github-token"
+- An environment variable `$CDK_ENV` set with the name of the environment you want to use
+  - `dev`
+  - `test`
+  - `prod`
 
 ## Installation
 
 ```bash
-$ npm install
+# From the root of the project
+npm install
+
+cd ./application
+
+npm install
+
+cp .env.example .env
+
+# Ensure that you update the .env file with real values for the Auth0 configs
 ```
 
-## Running the app
+## Initial Database Setup
 
 ```bash
-# development
-$ npm run start
+# From within the ./application directory
 
-# watch mode
+# Start the database locally in docker
+npm run start:docker-db
+
+# # Uses the TypeORM CLI to run the migrations to set up the DB
+npm run migrate:run
+```
+
+## NPM Commands
+
+These commands can be run from the `./application` subdirectory to interact with the API
+
+```bash
+# local development w/ docker in watch mode (preferred)
+$ npm run dev
+
+# local development debug mode w/docker
+$ npm run debug
+
+# local development
+$ npm start
+
+# local watch mode
 $ npm run start:dev
 
 # production mode
 $ npm run start:prod
-```
 
-## Test
+# transpile/build the application
+$ npm run build
 
-```bash
-# unit tests
+# rebuild the docker containers
+$ npm run build:docker
+
+# build the generated developer documentation
+$ npm run build:docs
+
+# start a small webserver to serve the developer documentation
+$ npm run start:docs
+
+# create a new database migration
+$ npm run migrate:create NameOfYourMigration
+
+# generate a new database migration based on changes to the TypeORM entities
+$ npm run migrate:generate NameOfYourMigration
+
+# execute any new migrations
+$ npm run migrate:run
+
+# roll back the single most recent migration
+$ npm run migrate:revert
+
+# run tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
+# run tests in watch mode, reloading and re-running updated tests
+$ npm run test:watch
 
-# test coverage
-$ npm run test:cov
+# obtain a new auth token
+$ npm run get-token
 ```
 
-## Support
+## Authentication
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+The API implements bearer token-based authentication using Auth0. To set it up, you'll need to create an API and an Application in Auth0. Then, copy the following values to your `.env` file:
 
-## Stay in touch
+- Auth0 issuer url (Using your tenant, e.g. https://yourtenant.auth0.com/)
+- Auth0 audience
+- Auth0 application client ID
+- Auth0 application secret
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Now, you can obtain a bearer token for development by running `npm run get-token`
 
-## License
+## OpenAPI Docs
 
-Nest is [MIT licensed](LICENSE).
+The OpenAPI/Swagger docs are available at [http://localhost:4000/docs/#/](http://localhost:4000/docs/#/) when the API is running. This documentation provides information about the currently defined API routes, HTTP requests and payload/response type info.
+
+## Developer Documentation
+
+The developer documentation is generated by [compodoc](https://compodoc.app/) by running `npm run build:docs`. It generates application documentation by introspecting the classes and types in the codebase and by parsing JSDoc comments.
+
+## Deployment to AWS Cloud
+
+This project uses the AWS CDK to manage infrastructure for this project via Typescript code in the `./bin` and `./lib` subdirectories of the project.
+
+#### Initialize the AWS Docker Registry
+
+This step will set up the AWS Docker registry (ECR) in advance, so that the image will be present at the time of the initial deployment.
+
+```bash
+./scripts/docker-init.sh
+```
+
+### Initial Deployment
+
+These steps must be performed from the root of the project. The project does environment-based deployments, meaning that the deployment is namespaced with whatever value you have stored in `$CDK_ENV`.
+
+This project is configured to deploy a specific branch to a specific environment. The mapping is:
+
+- Git Branch: dev -> Deploy Env: dev
+- Git Branch: test -> Deploy Env: test
+- Git Branch: main -> Deploy Env: prod
+
+The initial deploy initializes the pipeline for the given environment, and then pushes to the related git branch will trigger a CI/CD deployment.
+
+For example:
+
+- Initial deployment: `CDK_ENV=dev cdk deploy --all`
+- Make changes to code and `git commit`
+- Git push to GitHub branch `dev`
+- CI/CD pipeline triggers and deploys the changes
+
+### Connecting to Remote Database from Local Machine
+
+The PostgreSQL database in AWS is created in a private network, which means that you can't connect to it directly. Instead you will have to first connect to an EC2 instance, and then from there connect to the DB.
+
+To simplify this process, you can use the script located at `./scripts/db-tunnel.sh`. When you execute this script, it will look up the relevant information based on the credentials in your AWS CLI config and open a connection for you. Then, you can connect to the DB using the credentials displayed in the script output.

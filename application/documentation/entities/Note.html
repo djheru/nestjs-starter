@@ -324,7 +324,7 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @ManyToMany(type &#x3D;&gt; Tag, tags &#x3D;&gt; tags.notes, {cascade: undefined, eager: true})<br />@JoinTable()<br />
+                            @ManyToMany(undefined, tags &#x3D;&gt; tags.notes, {cascade: undefined, eager: true})<br />@JoinTable()<br />
                         </code>
                     </td>
                 </tr>
@@ -476,7 +476,7 @@ export class Note {
   @Column({ nullable: true })
   details?: string;
 
-  @ManyToMany((type) &#x3D;&gt; Tag, (tags) &#x3D;&gt; tags.notes, {
+  @ManyToMany(() &#x3D;&gt; Tag, (tags) &#x3D;&gt; tags.notes, {
     cascade: [&#x27;insert&#x27;, &#x27;update&#x27;],
     eager: true,
   })

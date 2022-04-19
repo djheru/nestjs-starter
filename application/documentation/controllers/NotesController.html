@@ -143,8 +143,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/notes/notes.controller.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">src/notes/notes.controller.ts:26</a></div>
                 </td>
             </tr>
 
@@ -219,8 +219,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">src/notes/notes.controller.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/notes/notes.controller.ts:31</a></div>
                 </td>
             </tr>
 
@@ -295,8 +295,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/notes/notes.controller.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/notes/notes.controller.ts:36</a></div>
                 </td>
             </tr>
 
@@ -371,8 +371,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">src/notes/notes.controller.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/notes/notes.controller.ts:46</a></div>
                 </td>
             </tr>
 
@@ -447,8 +447,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">src/notes/notes.controller.ts:45</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">src/notes/notes.controller.ts:41</a></div>
                 </td>
             </tr>
 
@@ -526,7 +526,6 @@
 import { NotesService } from &#x27;./notes.service&#x27;;
 import { CreateNoteDto } from &#x27;./dto/create-note.dto&#x27;;
 import { UpdateNoteDto } from &#x27;./dto/update-note.dto&#x27;;
-import { LoggerService } from &#x27;logger/logger.service&#x27;;
 import { PaginationQueryDto } from &#x27;common/dto/pagination-query.dto&#x27;;
 import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import { JwtAuthGuard } from &#x27;common/guards/jwt-auth.guard&#x27;;
@@ -535,10 +534,7 @@ import { JwtAuthGuard } from &#x27;common/guards/jwt-auth.guard&#x27;;
 @ApiTags(&#x27;Notes&#x27;)
 @UseGuards(JwtAuthGuard)
 export class NotesController {
-  constructor(
-    private readonly notesService: NotesService,
-    private readonly log: LoggerService
-  ) {}
+  constructor(private readonly notesService: NotesService) {}
 
   @Post()
   create(@Body() createNoteDto: CreateNoteDto) {

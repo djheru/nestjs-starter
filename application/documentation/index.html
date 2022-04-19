@@ -32,56 +32,130 @@
                <div class="content getting-started">
                    <div class="content-data">
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
+<h1 id="note-taker-api">Note Taker API</h1>
 <h2 id="description">Description</h2>
-<p><a href="https://github.com/nestjs/nest">Nest</a> framework TypeScript starter repository.</p>
+<p>An example production-ready boilerplate API using Nest.js, TypeORM, PostgreSQL, Docker, and AWS CDK (Cloud Development Kit) for Continuous Integration/Continuous Delivery Deployment. Also includes authentication with Auth0 and unit tests with Jest</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To run the application locally, you should have the following software installed:</p>
+<ul>
+<li>Node.js version &gt;= 14</li>
+<li>Docker desktop</li>
+<li>CURL (to obtain auth tokens)</li>
+</ul>
+<p>To perform deployments to AWS cloud, you should also have the following ready to go:</p>
+<ul>
+<li>AWS CLI installed and configured</li>
+<li>AWS CDK CLI installed and configured</li>
+<li>An SSH client and key pair to use for connecting to the remote server</li>
+<li>A GitHub personal access token created and saved in AWS Secrets Manager under the name &quot;github-token&quot;</li>
+<li>An environment variable <code>$CDK_ENV</code> set with the name of the environment you want to use<ul>
+<li><code>dev</code></li>
+<li><code>test</code></li>
+<li><code>prod</code></li>
+</ul>
+</li>
+</ul>
 <h2 id="installation">Installation</h2>
-<div><pre class="line-numbers"><code class="language-bash">$ npm install</code></pre></div><h2 id="running-the-app">Running the app</h2>
-<div><pre class="line-numbers"><code class="language-bash"># development
-$ npm run start
+<div><pre class="line-numbers"><code class="language-bash"># From the root of the project
+npm install
 
-# watch mode
+cd ./application
+
+npm install
+
+cp .env.example .env
+
+# Ensure that you update the .env file with real values for the Auth0 configs</code></pre></div><h2 id="initial-database-setup">Initial Database Setup</h2>
+<div><pre class="line-numbers"><code class="language-bash"># From within the ./application directory
+
+# Start the database locally in docker
+npm run start:docker-db
+
+# # Uses the TypeORM CLI to run the migrations to set up the DB
+npm run migrate:run</code></pre></div><h2 id="npm-commands">NPM Commands</h2>
+<p>These commands can be run from the <code>./application</code> subdirectory to interact with the API</p>
+<div><pre class="line-numbers"><code class="language-bash"># local development w/ docker in watch mode (preferred)
+$ npm run dev
+
+# local development debug mode w/docker
+$ npm run debug
+
+# local development
+$ npm start
+
+# local watch mode
 $ npm run start:dev
 
 # production mode
-$ npm run start:prod</code></pre></div><h2 id="test">Test</h2>
-<div><pre class="line-numbers"><code class="language-bash"># unit tests
+$ npm run start:prod
+
+# transpile/build the application
+$ npm run build
+
+# rebuild the docker containers
+$ npm run build:docker
+
+# build the generated developer documentation
+$ npm run build:docs
+
+# start a small webserver to serve the developer documentation
+$ npm run start:docs
+
+# create a new database migration
+$ npm run migrate:create NameOfYourMigration
+
+# generate a new database migration based on changes to the TypeORM entities
+$ npm run migrate:generate NameOfYourMigration
+
+# execute any new migrations
+$ npm run migrate:run
+
+# roll back the single most recent migration
+$ npm run migrate:revert
+
+# run tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
+# run tests in watch mode, reloading and re-running updated tests
+$ npm run test:watch
 
-# test coverage
-$ npm run test:cov</code></pre></div><h2 id="support">Support</h2>
-<p>Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you&#39;d like to join them, please <a href="https://docs.nestjs.com/support">read more here</a>.</p>
-<h2 id="stay-in-touch">Stay in touch</h2>
+# obtain a new auth token
+$ npm run get-token</code></pre></div><h2 id="authentication">Authentication</h2>
+<p>The API implements bearer token-based authentication using Auth0. To set it up, you&#39;ll need to create an API and an Application in Auth0. Then, copy the following values to your <code>.env</code> file:</p>
 <ul>
-<li>Author - <a href="https://kamilmysliwiec.com">Kamil Myśliwiec</a></li>
-<li>Website - <a href="https://nestjs.com/">https://nestjs.com</a></li>
-<li>Twitter - <a href="https://twitter.com/nestframework">@nestframework</a></li>
+<li>Auth0 issuer url (Using your tenant, e.g. <a href="https://yourtenant.auth0.com/">https://yourtenant.auth0.com/</a>)</li>
+<li>Auth0 audience</li>
+<li>Auth0 application client ID</li>
+<li>Auth0 application secret</li>
 </ul>
-<h2 id="license">License</h2>
-<p>Nest is <a href="LICENSE">MIT licensed</a>.</p>
+<p>Now, you can obtain a bearer token for development by running <code>npm run get-token</code></p>
+<h2 id="openapi-docs">OpenAPI Docs</h2>
+<p>The OpenAPI/Swagger docs are available at <a href="http://localhost:4000/docs/#/">http://localhost:4000/docs/#/</a> when the API is running. This documentation provides information about the currently defined API routes, HTTP requests and payload/response type info.</p>
+<h2 id="developer-documentation">Developer Documentation</h2>
+<p>The developer documentation is generated by <a href="https://compodoc.app/">compodoc</a> by running <code>npm run build:docs</code>. It generates application documentation by introspecting the classes and types in the codebase and by parsing JSDoc comments.</p>
+<h2 id="deployment-to-aws-cloud">Deployment to AWS Cloud</h2>
+<p>This project uses the AWS CDK to manage infrastructure for this project via Typescript code in the <code>./bin</code> and <code>./lib</code> subdirectories of the project.</p>
+<h4 id="initialize-the-aws-docker-registry">Initialize the AWS Docker Registry</h4>
+<p>This step will set up the AWS Docker registry (ECR) in advance, so that the image will be present at the time of the initial deployment.</p>
+<div><pre class="line-numbers"><code class="language-bash">./scripts/docker-init.sh</code></pre></div><h3 id="initial-deployment">Initial Deployment</h3>
+<p>These steps must be performed from the root of the project. The project does environment-based deployments, meaning that the deployment is namespaced with whatever value you have stored in <code>$CDK_ENV</code>.</p>
+<p>This project is configured to deploy a specific branch to a specific environment. The mapping is:</p>
+<ul>
+<li>Git Branch: dev -&gt; Deploy Env: dev</li>
+<li>Git Branch: test -&gt; Deploy Env: test</li>
+<li>Git Branch: main -&gt; Deploy Env: prod</li>
+</ul>
+<p>The initial deploy initializes the pipeline for the given environment, and then pushes to the related git branch will trigger a CI/CD deployment.</p>
+<p>For example:</p>
+<ul>
+<li>Initial deployment: <code>CDK_ENV=dev cdk deploy --all</code></li>
+<li>Make changes to code and <code>git commit</code></li>
+<li>Git push to GitHub branch <code>dev</code></li>
+<li>CI/CD pipeline triggers and deploys the changes</li>
+</ul>
+<h3 id="connecting-to-remote-database-from-local-machine">Connecting to Remote Database from Local Machine</h3>
+<p>The PostgreSQL database in AWS is created in a private network, which means that you can&#39;t connect to it directly. Instead you will have to first connect to an EC2 instance, and then from there connect to the DB.</p>
+<p>To simplify this process, you can use the script located at <code>./scripts/db-tunnel.sh</code>. When you execute this script, it will look up the relevant information based on the credentials in your AWS CLI config and open a connection for you. Then, you can connect to the DB using the credentials displayed in the script output.</p>
 
 
 
