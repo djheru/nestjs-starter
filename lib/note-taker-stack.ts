@@ -213,6 +213,8 @@ export class NoteTakerStack extends Stack {
       NO_COLOR: 'true',
     };
     const taskSecrets = {
+      AUTH0_ISSUER_URL: 'https://dev-pdamra.auth0.com/',
+      AUTH0_AUDIENCE: 'https://ecs-recipes/',
       PGUSER: aws_ecs.Secret.fromSecretsManager(
         this.databaseCredentialsSecret,
         'username'
