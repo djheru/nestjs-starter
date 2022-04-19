@@ -4,5 +4,25 @@
       "path": "."
     }
   ],
-  "settings": {}
+  "settings": {
+    "launch": {
+      "configurations": [
+        {
+          "type": "node",
+          "request": "attach",
+          "name": "Debug: note-taker",
+          "remoteRoot": "/usr/src/app",
+          "localRoot": "${workspaceFolder}/application",
+          "protocol": "inspector",
+          "port": 9229,
+          "restart": true,
+          "address": "0.0.0.0",
+          "outFiles": ["${workspaceFolder}/application/dist/**/*.js"],
+          "skipFiles": ["<node_internals>/**"],
+          "sourceMaps": true
+        }
+      ],
+      "compounds": []
+    }
+  }
 }

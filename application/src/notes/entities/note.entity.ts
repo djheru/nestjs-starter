@@ -26,7 +26,7 @@ export class Note {
   @Column({ nullable: true })
   details?: string;
 
-  @ManyToMany((type) => Tag, (tags) => tags.notes, {
+  @ManyToMany(() => Tag, (tags) => tags.notes, {
     cascade: ['insert', 'update'],
     eager: true,
   })

@@ -12,7 +12,6 @@ import {
 import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
-import { LoggerService } from 'logger/logger.service';
 import { PaginationQueryDto } from 'common/dto/pagination-query.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'common/guards/jwt-auth.guard';
@@ -21,10 +20,7 @@ import { JwtAuthGuard } from 'common/guards/jwt-auth.guard';
 @ApiTags('Notes')
 @UseGuards(JwtAuthGuard)
 export class NotesController {
-  constructor(
-    private readonly notesService: NotesService,
-    private readonly log: LoggerService
-  ) {}
+  constructor(private readonly notesService: NotesService) {}
 
   @Post()
   create(@Body() createNoteDto: CreateNoteDto) {
