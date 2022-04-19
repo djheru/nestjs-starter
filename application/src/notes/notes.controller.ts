@@ -1,11 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { LoggerService } from 'logger/logger.service';
 import { PaginationQueryDto } from 'common/dto/pagination-query.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'common/guards/jwt-auth.guard';
 
 @Controller('notes')
+@ApiTags('Notes')
+@UseGuards(JwtAuthGuard)
 export class NotesController {
   constructor(
     private readonly notesService: NotesService,

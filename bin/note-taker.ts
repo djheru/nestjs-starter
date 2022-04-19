@@ -29,7 +29,7 @@ variable`,
   },
 };
 
-const hostedZoneDomainName = 'planningpoker.dev';
+const hostedZoneDomainName = 'team-brackets.com';
 const serviceName = 'note-taker';
 
 const stackId = `${serviceName}-${environmentName}`;

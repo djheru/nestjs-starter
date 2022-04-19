@@ -3,10 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'auth/auth.module';
+import authConfig from 'config/auth.config';
 import databaseConfig, { databases } from 'config/database.config';
 import { LoggerModule } from 'logger/logger.module';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { NotesModule } from './notes/notes.module';
 
 export const appModuleDocumentation = (app: INestApplication): void => {
@@ -24,7 +23,7 @@ export const appModuleDocumentation = (app: INestApplication): void => {
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [databaseConfig.recipeBlog],
+      load: [databaseConfig.recipeBlog, authConfig.auth0],
     }),
     LoggerModule,
     TypeOrmModule.forRootAsync({
@@ -36,7 +35,7 @@ export const appModuleDocumentation = (app: INestApplication): void => {
     AuthModule,
     NotesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
